@@ -92,6 +92,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WallpainterMain";
             this.Text = "Wallpainter";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WallpainterMain_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

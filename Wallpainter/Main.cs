@@ -43,5 +43,11 @@ namespace Wallpainter
             mgr.SetWallpaper(IntPtr.Zero);
             buttonDetach.Enabled = false;
         }
+
+        private void WallpainterMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Reset the wallpaper on exit
+            mgr.SetWallpaper(IntPtr.Zero);
+        }
     }
 }
