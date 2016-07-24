@@ -37,7 +37,7 @@ namespace Wallpainter
 
         public WallpaperManager()
         {
-            progman = Wallpainter.GetWorkerHandle();
+            progman = Wallpainter.SetupWallpaper();
 
             if (progman == IntPtr.Zero)
                 throw new InvalidOperationException("Failed to retrieve progman!");
