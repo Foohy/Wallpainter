@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WallpainterMain));
             this.textboxWindowName = new System.Windows.Forms.TextBox();
             this.buttonAttach = new System.Windows.Forms.Button();
             this.buttonDetach = new System.Windows.Forms.Button();
@@ -77,6 +78,7 @@
             this.Controls.Add(this.buttonDetach);
             this.Controls.Add(this.buttonAttach);
             this.Controls.Add(this.textboxWindowName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WallpainterMain";
             this.Text = "Wallpainter";
             this.ResumeLayout(false);
