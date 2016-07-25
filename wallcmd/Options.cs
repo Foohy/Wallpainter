@@ -11,8 +11,8 @@ namespace wallcmd
         [Option('n', "name", HelpText = "Window name to set as the desktop background")]
         public string windowName { get; set; }
 
-        [Option('p', "pid", HelpText = "Process ID holding the hwnd handle to set")]
-        public string pid { get; set; }
+        [Option('c', "class", HelpText = "Class name of the window to be set as the background")]
+        public string className { get; set; }
     }
 
     class StartOptions

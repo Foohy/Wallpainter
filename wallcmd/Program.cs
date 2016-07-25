@@ -42,19 +42,37 @@ namespace wallcmd
             return 0;
         }
 
-        public static void Set(SetOptions op)
+        public static bool Set(SetOptions op)
+        {
+            //Attempt to grab any window that matches
+            IntPtr wndHandle = WindowUtils.FindWindowByTitle(op.windowName);
+            if (wndHandle == IntPtr.Zero)
+                wndHandle = WindowUtils.FindWindowByClass(op.className);
+
+            //Fail early if we didn't find anything
+            if (wndHandle == IntPtr.Zero)
+            {
+                Console.Error.WriteLine("Failed to find matching window.");
+                return false;
+            }
+
+            //Set the wallpaper
+            bool succesful = new WallpaperManager().SetWallpaper(wndHandle);
+            if (!succesful)
+                Console.Error.WriteLine("Failed to set wallpaper");
+
+            return succesful;
+        }
+
+        public static bool Start(StartOptions op)
         {
             throw new NotImplementedException();
         }
 
-        public static void Start(StartOptions op)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void Reset(ResetOptions op)
+        public static bool Reset(ResetOptions op)
         {
             WindowUtils.ClearWallpaper(op.killProcess);
+            return true;
         }
     }
 }
