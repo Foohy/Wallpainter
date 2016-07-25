@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Wallpainter;
 
-namespace Wallpainter
+namespace WallpainterForm
 {
     public partial class WallpainterMain : Form
     {
-        WallpaperManager mgr;
+        Wallpainter.WallpaperManager mgr;
 
         public WallpainterMain()
         {
@@ -25,7 +26,8 @@ namespace Wallpainter
         {
             //TODO: Better window picker
             //Also ability to startup programs to set
-            IntPtr wndHandle = WinAPI.FindWindow(null, textboxWindowName.Text);
+            
+            IntPtr wndHandle = WindowUtils.FindWindowByTitle(textboxWindowName.Text);
             if (wndHandle == IntPtr.Zero)
             {
                 MessageBox.Show("No window found!", "Failed to attach", MessageBoxButtons.OK, MessageBoxIcon.Error);

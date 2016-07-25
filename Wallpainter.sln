@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallpainter", "Wallpainter\Wallpainter.csproj", "{EA54D3E6-FAED-4F75-BF65-1BB66A99A446}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WallpainterForm", "WallpainterForm\WallpainterForm.csproj", "{EA54D3E6-FAED-4F75-BF65-1BB66A99A446}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3AC20D0C-35C7-4104-8091-896C182FBA16} = {3AC20D0C-35C7-4104-8091-896C182FBA16}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallpainter", "Wallpainter\Wallpainter.csproj", "{3AC20D0C-35C7-4104-8091-896C182FBA16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +23,12 @@ Global
 		{EA54D3E6-FAED-4F75-BF65-1BB66A99A446}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA54D3E6-FAED-4F75-BF65-1BB66A99A446}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA54D3E6-FAED-4F75-BF65-1BB66A99A446}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AC20D0C-35C7-4104-8091-896C182FBA16}.Build|Any CPU.ActiveCfg = Release|Any CPU
+		{3AC20D0C-35C7-4104-8091-896C182FBA16}.Build|Any CPU.Build.0 = Release|Any CPU
+		{3AC20D0C-35C7-4104-8091-896C182FBA16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AC20D0C-35C7-4104-8091-896C182FBA16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AC20D0C-35C7-4104-8091-896C182FBA16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AC20D0C-35C7-4104-8091-896C182FBA16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

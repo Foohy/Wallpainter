@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Wallpainter
 {
-    class WallpaperManager
+    public class WallpaperManager
     {
         private struct Window
         {
@@ -86,7 +84,30 @@ namespace Wallpainter
             if (WinAPI.SetParent(window.Handle, IntPtr.Zero) != IntPtr.Zero)
             {
                 WinAPI.SetWindowLong(window.Handle, (int)WinAPI.WindowLongFlags.GWL_STYLE, window.Style);
-            }   
+            }
+        }
+    }
+
+    public static class WindowUtils
+    {   
+        /// <summary>
+        /// Find a specific active window by its title
+        /// </summary>
+        /// <param name="title">The window title</param>
+        /// <returns>Window handle, or null if not found</returns>
+        public static IntPtr FindWindowByTitle(string title)
+        {
+            return WinAPI.FindWindow(null, title);
+        }
+
+        /// <summary>
+        /// Find a specific window by its classname
+        /// </summary>
+        /// <param name="classname">Window classname</param>
+        /// <returns>Window handle, or null it not found</returns>
+        public static IntPtr FindWindowByClass(string classname)
+        {
+            return WinAPI.FindWindow(classname, null);
         }
     }
 }

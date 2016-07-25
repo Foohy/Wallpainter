@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
 namespace Wallpainter
 {
-
     class WinAPI
     {
         /// <summary>
@@ -71,8 +67,7 @@ namespace Wallpainter
         public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
     }
 
-
-    class Wallpainter
+    internal class Wallpainter
     {
         /// <summary>
         /// Spawns and hides the wallpaper worker, while returning a handle to the progman window
@@ -100,7 +95,7 @@ namespace Wallpainter
                 //If we found that, look for the corresponding worker window as a sibling of that
                 if (p != IntPtr.Zero)
                 {
-                    workerw = WinAPI.FindWindowEx(IntPtr.Zero,  tophandle, "WorkerW", null);
+                    workerw = WinAPI.FindWindowEx(IntPtr.Zero, tophandle, "WorkerW", null);
                 }
 
                 return true;

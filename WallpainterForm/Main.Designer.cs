@@ -1,4 +1,4 @@
-﻿namespace Wallpainter
+﻿namespace WallpainterForm
 {
     partial class WallpainterMain
     {
@@ -38,7 +38,7 @@
             // textboxWindowName
             // 
             this.textboxWindowName.AccessibleRole = System.Windows.Forms.AccessibleRole.SplitButton;
-            this.textboxWindowName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textboxWindowName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textboxWindowName.Location = new System.Drawing.Point(87, 12);
             this.textboxWindowName.Name = "textboxWindowName";
@@ -47,8 +47,8 @@
             // 
             // buttonAttach
             // 
-            this.buttonAttach.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.buttonAttach.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAttach.Location = new System.Drawing.Point(12, 38);
             this.buttonAttach.Name = "buttonAttach";
@@ -60,7 +60,7 @@
             // 
             // buttonDetach
             // 
-            this.buttonDetach.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.buttonDetach.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonDetach.Enabled = false;
             this.buttonDetach.Location = new System.Drawing.Point(309, 38);
