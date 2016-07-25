@@ -13,7 +13,7 @@ namespace WallpainterForm
 {
     public partial class WallpainterMain : Form
     {
-        Wallpainter.WallpaperManager mgr;
+        WallpaperManager mgr;
 
         public WallpainterMain()
         {

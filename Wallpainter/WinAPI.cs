@@ -4,12 +4,13 @@ using System.Runtime.InteropServices;
 
 namespace Wallpainter
 {
-    class WinAPI
+    internal class WinAPI
     {
         /// <summary>
         /// Undocumented message for spawning a wallpaper worker on the program manager
         /// </summary>
-        public static UInt32 SPAWN_WORKER = 0x052C;
+        public static UInt32 WM_SPAWN_WORKER = 0x052C;
+        public static UInt32 WM_CLOSE = 0x0010;
 
         public enum WindowLongFlags : int
         {
@@ -41,6 +42,9 @@ namespace Wallpainter
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
 
+        [DllImport("user32.dll")]
+        internal static extern bool EnumChildWindows(IntPtr hwnd, EnumWindowsProc func, IntPtr lParam);
+
         [DllImport("user32.dll", SetLastError = true)]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
@@ -70,17 +74,26 @@ namespace Wallpainter
     internal class Wallpainter
     {
         /// <summary>
+        /// Retrieves the handle of the progman
+        /// </summary>
+        /// <returns></returns>
+        public static IntPtr GetProgman()
+        {
+            return WinAPI.FindWindow("Progman", null);
+        }
+
+        /// <summary>
         /// Spawns and hides the wallpaper worker, while returning a handle to the progman window
         /// </summary>
         /// <returns>A Handle to progman</returns>
         public static IntPtr SetupWallpaper()
         {
             //get the handle of the progman window
-            IntPtr progman = WinAPI.FindWindow("Progman", null);
+            IntPtr progman = GetProgman();
 
             //Send the spooky undocumented message to the progman, which will spawn the new worker window
             // that is in charge of fading the wallpaper background
-            WinAPI.SendMessage(progman, WinAPI.SPAWN_WORKER, IntPtr.Zero, IntPtr.Zero);
+            WinAPI.SendMessage(progman, WinAPI.WM_SPAWN_WORKER, IntPtr.Zero, IntPtr.Zero);
 
 
 

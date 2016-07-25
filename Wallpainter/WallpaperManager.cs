@@ -109,5 +109,27 @@ namespace Wallpainter
         {
             return WinAPI.FindWindow(classname, null);
         }
+
+        /// <summary>
+        /// Clear the wallpaper by closing all the children of progman
+        /// </summary>
+        /// <param name="killChildren"></param>
+        /// <returns></returns>
+        public static void ClearWallpaper(bool killChildren)
+        {
+            IntPtr progman = Wallpainter.GetProgman();
+
+            //TODO: Restore the style too. Saved styles aren't available in a static context
+            WinAPI.EnumChildWindows(progman, new WinAPI.EnumWindowsProc((tophandle, topparamhandle) =>
+            {
+                WinAPI.SetParent(tophandle, IntPtr.Zero);
+
+                //Gracefully try to close the application
+                if (killChildren)
+                    WinAPI.SendMessage(tophandle, WinAPI.WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+
+                return true;
+            }), IntPtr.Zero);
+        }
     }
 }
