@@ -8,10 +8,10 @@ namespace wallcmd
 
     class SetOptions
     {
-        [Option('n', "name", HelpText = "Window name to set as the desktop background")]
+        [Option('n', "name", MutuallyExclusiveSet = "name", HelpText = "Window name to set as the desktop background")]
         public string windowName { get; set; }
 
-        [Option('c', "class", HelpText = "Class name of the window to be set as the background")]
+        [Option('c', "class", MutuallyExclusiveSet = "class", HelpText = "Class name of the window to be set as the background")]
         public string className { get; set; }
     }
 
@@ -20,8 +20,8 @@ namespace wallcmd
         [Option('p', "path", Required = true, HelpText = "Path to the executable to start")]
         public string path { get; set; }
 
-        [Option('a', "args", Required = false, HelpText = "Command line arguments for the process to be created")]
-        public List<string> args { get; set; }
+        [Option('a', "args", Required = false, HelpText = "Command line arguments for the process to be created. (Wrap in quotes)")]
+        public string args { get; set; }
     }
 
     class ResetOptions
