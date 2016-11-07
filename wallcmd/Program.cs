@@ -28,22 +28,17 @@ namespace wallcmd
             switch (invokedVerb)
             {
                 case Options.VERB_SET:
-                    Set((SetOptions)invokedVerbOptions);
-                    break;
+                    return Set((SetOptions)invokedVerbOptions) ? 0 : 1;
 
                 case Options.VERB_START:
-                    Start((StartOptions)invokedVerbOptions);
-                    break;
+                    return Start((StartOptions)invokedVerbOptions) ? 0 : 1;
 
                 case Options.VERB_RESET:
-                    Reset((ResetOptions)invokedVerbOptions);
-                    break;
+                    return Reset((ResetOptions)invokedVerbOptions) ? 0: 1;
 
                 default:
                     return 1;
             }
-
-            return 0;
         }
 
         public static bool Set(SetOptions op)
