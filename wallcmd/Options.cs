@@ -5,6 +5,11 @@ using CommandLine;
 
 namespace wallcmd
 {
+    public struct Tuple
+    {
+        float x;
+        float y;
+    }
 
     class SetOptions
     {
@@ -13,6 +18,10 @@ namespace wallcmd
 
         [Option('c', "class", MutuallyExclusiveSet = "class", HelpText = "Class name of the window to be set as the background")]
         public string className { get; set; }
+
+        [OptionList('b', "bounds", Separator = ' ', HelpText = "Specify the bounds of the window. Ordered as x, y, width, height, and is measured in pixels")]
+        public IList<string> bounds { get; set; }
+
     }
 
     class StartOptions
@@ -22,6 +31,9 @@ namespace wallcmd
 
         [Option('a', "args", Required = false, HelpText = "Command line arguments for the process to be created. (Wrap in quotes)")]
         public string args { get; set; }
+
+        [OptionList('b', "bounds", Separator = ' ', HelpText = "Specify the bounds of the window. Ordered as x, y, width, height, and is measured in pixels. (Wrap in quotes)")]
+        public IList<string> bounds { get; set; }
     }
 
     class ResetOptions

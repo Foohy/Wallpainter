@@ -55,8 +55,11 @@ namespace wallcmd
                 return false;
             }
 
+            int x = 0, y = 0, w = 0, h = 0;
+            parseBounds(op.bounds, out x, out y, out w, out h);
+
             //Set the wallpaper
-            bool succesful = new WallpaperManager().SetWallpaper(wndHandle);
+            bool succesful = new WallpaperManager().SetWallpaper(wndHandle, x, y, w, h);
             if (!succesful)
                 Console.Error.WriteLine("Failed to set wallpaper");
 
@@ -74,7 +77,10 @@ namespace wallcmd
                 return false;
             }
 
-            bool succesful = new WallpaperManager().SetWallpaper(hwnd);
+            int x = 0, y = 0, w = 0, h = 0;
+            parseBounds(op.bounds, out x, out y, out w, out h);
+
+            bool succesful = new WallpaperManager().SetWallpaper(hwnd, x, y, w, h);
             if (!succesful)
             {
                 Console.Error.WriteLine("Failed to set wallpaper");
@@ -144,6 +150,30 @@ namespace wallcmd
             if (WinAPI.GetClassName(hWnd, sb, sb.Capacity) == 0) { return false; }
 
             return string.Compare(sb.ToString(), "ConsoleWindowClass", true, CultureInfo.InvariantCulture) == 0;
+        }
+
+        private static void parseBounds(IList<string> bounds, out int x, out int y, out int w, out int h)
+        {
+            if (bounds == null)
+            {
+                x = y = w = h = 0;
+                return;
+            }
+
+            IEnumerator<string> inputEnum = bounds.GetEnumerator(); inputEnum.MoveNext();
+            x = tryParseNext(inputEnum);
+            y = tryParseNext(inputEnum);
+            w = tryParseNext(inputEnum);
+            h = tryParseNext(inputEnum);
+        }
+
+        private static int tryParseNext(IEnumerator<string> inputEnum)
+        {
+            int res = 0;
+            int.TryParse(inputEnum.Current, out res);
+            inputEnum.MoveNext();
+
+            return res;
         }
     }
 }
