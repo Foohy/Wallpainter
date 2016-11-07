@@ -10,11 +10,13 @@ namespace Wallpainter
         {
             public IntPtr Handle;
             public UInt32 Style;
+            public WinAPI.RECT Bounds;
 
-            public Window(IntPtr hwnd, uint style)
+            public Window(IntPtr hwnd, uint style, WinAPI.RECT bounds)
             {
                 Handle = hwnd;
                 Style = style;
+                Bounds = bounds;
             }
 
             public bool IsValid()
@@ -41,7 +43,7 @@ namespace Wallpainter
                 throw new InvalidOperationException("Failed to retrieve progman!");
         }
 
-        public bool SetWallpaper(IntPtr wp)
+        public bool SetWallpaper(IntPtr wp, int x = 0, int y = 0, int w = 0, int h = 0)
         {
             //Remove from wallpaper
             if (curWindow.IsValid())
@@ -51,7 +53,7 @@ namespace Wallpainter
             }
 
             //set the next
-            curWindow = Set(wp);
+            curWindow = Set(wp, x, y, w, h);
 
             return curWindow.IsValid();
         }
@@ -61,29 +63,42 @@ namespace Wallpainter
             return curWindow.Handle;
         }
 
-        private Window Set(IntPtr hwnd)
+        private Window Set(IntPtr hwnd, int x = 0, int y = 0, int w = 0, int h = 0)
         {
             uint style = WinAPI.GetWindowLong(hwnd, (int)WinAPI.WindowLongFlags.GWL_STYLE);
+       
+            WinAPI.RECT bounds;
+            WinAPI.GetWindowRect(hwnd, out bounds);
 
             if (WinAPI.SetParent(hwnd, progman) == IntPtr.Zero)
                 return new Window();
+
 
             //Remove borders
             //TODO: Should this be an option? It might break some programs
             WinAPI.SetWindowLong(hwnd, (int)WinAPI.WindowLongFlags.GWL_STYLE, 0);
 
-            //Maximize the window
-            //TODO: Fine-grained placement. This kinda sucks for multimonitor setups
-            WinAPI.ShowWindowAsync(hwnd, 3);
+            //Don't resize the window if given invalid width/height
+            uint flags = WinAPI.SetWindowPosFlags.FRAMECHANGED | WinAPI.SetWindowPosFlags.SHOWWINDOW;
+            if (w <= 0 || h <= 0)
+            {
+                flags |= WinAPI.SetWindowPosFlags.NOSIZE;
+            }
 
-            return new Window(hwnd, style);
+            //Size window and display
+            WinAPI.SetWindowPos(hwnd, IntPtr.Zero, x, y, w, h, flags);
+            WinAPI.ShowWindowAsync(hwnd, 1);
+
+            return new Window(hwnd, style, bounds);
         }
 
         private void Restore(Window window)
         {
             if (WinAPI.SetParent(window.Handle, IntPtr.Zero) != IntPtr.Zero)
             {
+                uint flags = WinAPI.SetWindowPosFlags.FRAMECHANGED | WinAPI.SetWindowPosFlags.SHOWWINDOW;
                 WinAPI.SetWindowLong(window.Handle, (int)WinAPI.WindowLongFlags.GWL_STYLE, window.Style);
+                WinAPI.SetWindowPos(window.Handle, IntPtr.Zero, window.Bounds.Left, window.Bounds.Top, window.Bounds.Width, window.Bounds.Height, flags);
             }
         }
     }
